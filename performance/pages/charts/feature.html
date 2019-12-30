@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html style="height:100%">
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="lib/echarts.min.js"></script>
+</head>
+
+<body style="height:100%">
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 100%;height:100%;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+var data = [
+    [[28604/700,77/8,17096869,'','女子'],[31163/700,77.4/8,27662440,'','女子'],[1516/700,68/8,1154605773,'','女子'],[13670/700,74.7/8,10582082,'','女子'],[28599/700,75/8,4986705,'','女子'],[29476/700,77.1/8,56943299,'','女子'],[31476/700,75.4/8,78958237,'','女子'],[28666/700,78.1/8,254830,'','女子'],[1777/700,57.7/8,870601776,'','女子'],[29550/700,79.1/8,122249285,'','女子'],[2076/700,67.9/8,20194354,'','女子'],[12087/700,72/8,42972254,'','女子'],[24021/700,75.4/8,3397534,'','女子'],[43296/700,76.8/8,4240375,'','女子'],[10088/700,70.8/8,38195258,'','女子'],[19349/700,69.6/8,147568552,'','女子'],[10670/700,67.3/8,53994605,'','女子'],[26424/700,75.7/8,57110117,'','女子'],[37062/700,75.4/8,252847810,' ','女子']],
+    [[44056/700,81.8/8,23968973,'','男子'],[43294/700,81.7/8,35939927,'','男子'],[13334/700,76.9/8,1376048943,'','男子'],[21291/700,78.5/8,11389562,'','男子'],[38923/700,80.8/8,5503457,'','男子'],[37599/700,81.9/8,64395345,'','男子'],[44053/700,81.1/8,80688545,'','男子'],[42182/700,82.8/8,329425,'','男子'],[5903/700,66.8/8,1311050527,'','男子'],[36162/700,83.5/8,126573481,'','男子'],[1390/700,71.4/8,25155317,'','男子'],[34644/700,80.7/8,50293439,'','男子'],[34186/700,80.6/8,4528526,'','男子'],[64304/700,81.6/8,5210967,'','男子'],[24787/700,77.3/8,38611794,'','男子'],[23038/700,73.13/8,143456918,'','男子'],[19360/700,76.5/8,78665830,'','男子'],[38225/700,81.4/8,64715810,'','男子'],[53354/700,79.1/8,321773631,' ','男子']]
+];
+
+option = {
+    backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+        offset: 0,
+        color: '#f7f8fa'
+    }, {
+        offset: 1,
+        color: '#cdd0d5'
+    }]),
+    title: {
+        text: '男子 与 女子 数据散列'
+    },
+    legend: {
+        right: 10,
+        data: ['女子', '男子']
+    },
+    xAxis: {
+        splitLine: {
+            lineStyle: {
+                type: 'dashed'
+            }
+        }
+    },
+    yAxis: {
+        splitLine: {
+            lineStyle: {
+                type: 'dashed'
+            }
+        },
+        scale: true
+    },
+    series: [{
+        name: '女子',
+        data: data[0],
+        type: 'scatter',
+        symbolSize: function (data) {
+            return Math.sqrt(data[2]) / 5e2;
+        },
+        label: {
+            emphasis: {
+                show: true,
+                formatter: function (param) {
+                    return param.data[3];
+                },
+                position: 'top'
+            }
+        },
+        itemStyle: {
+            normal: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(120, 36, 50, 0.5)',
+                shadowOffsetY: 5,
+                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    offset: 0,
+                    color: 'rgb(251, 118, 123)'
+                }, {
+                    offset: 1,
+                    color: 'rgb(204, 46, 72)'
+                }])
+            }
+        }
+    }, {
+        name: '男子',
+        data: data[1],
+        type: 'scatter',
+        symbolSize: function (data) {
+            return Math.sqrt(data[2]) / 5e2;
+        },
+        label: {
+            emphasis: {
+                show: true,
+                formatter: function (param) {
+                    return param.data[3];
+                },
+                position: 'top'
+            }
+        },
+        itemStyle: {
+            normal: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(25, 100, 150, 0.5)',
+                shadowOffsetY: 5,
+                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    offset: 0,
+                    color: 'rgb(129, 227, 238)'
+                }, {
+                    offset: 1,
+                    color: 'rgb(25, 183, 207)'
+                }])
+            }
+        }
+    }]
+};
+   
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

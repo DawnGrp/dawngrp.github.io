@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html style="height:100%">
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="lib/echarts.min.js"></script>
+</head>
+
+<body style="height:100%">
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 100%;height:100%;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var myData = ['球感', '控球', '踢准', '跑动', '竞赛'];
+        var databeast = {
+            1: [389, 259, 262, 324, 232],
+            2: [111, 315, 139, 375, 204],
+            3: [227, 210, 328, 292, 241],
+            4: [100, 350, 300, 250, 200],
+            5: [280, 128, 255, 254, 313],
+ 
+
+        };
+        var databeauty = {
+            1: [121, 388, 233, 309, 133],
+            2: [200, 350, 300, 250, 200],
+            3: [380, 129, 173, 101, 310],
+            4: [363, 396, 388, 108, 325],
+            5: [300, 350, 300, 250, 200],
+
+        };
+        var timeLineData = [1, 2, 3, 4, 5];
+        //var timeLineData = ["一级","二级","三级","四级","五级" ];
+
+        option = {
+            baseOption: {
+                backgroundColor: '#000',
+                timeline: {
+                    show: true,
+                    axisType: 'category',
+                    tooltip: {
+                        show: true,
+                        formatter: function (params) {
+                            console.log(params);
+                            return params.name + '级考试数据统计';
+                        }
+                    },
+                    autoPlay: true,
+                    currentIndex: 6,
+                    playInterval: 1000,
+                    label: {
+                        normal: {
+                            show: true,
+                            interval: 'auto',
+                            formatter: '{value}',
+                        },
+                    },
+                    data: [],
+                },
+                title: {
+                    //   text:'大北京景点帅哥美女统计', 
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 16,
+                    },
+                    subtext: '作者:DawnGrp',
+                },
+                legend: {
+                    data: ['个人值', '平均值'],
+                    top: 4,
+                    right: '10%',
+                    textStyle: {
+                        color: '#fff',
+                    },
+                },
+                tooltip: {
+                    show: true,
+                    trigger: 'axis',
+                    formatter: '{b}<br/>{a}: {c}',
+                    axisPointer: {
+                        type: 'shadow',
+                    }
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                grid: [{
+                    show: false,
+                    left: '4%',
+                    top: 60,
+                    bottom: 60,
+                    containLabel: true,
+                    width: '46%',
+                }, {
+                    show: false,
+                    left: '50.5%',
+                    top: 80,
+                    bottom: 60,
+                    width: '0%',
+                }, {
+                    show: false,
+                    right: '4%',
+                    top: 60,
+                    bottom: 60,
+                    containLabel: true,
+                    width: '46%',
+                }, ],
+
+                xAxis: [{
+                    type: 'value',
+                    inverse: true,
+                    axisLine: {
+                        show: false,
+                    },
+                    axisTick: {
+                        show: false,
+                    },
+                    position: 'top',
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#B2B2B2',
+                            fontSize: 12,
+                        },
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#1F2022',
+                            width: 1,
+                            type: 'solid',
+                        },
+                    },
+                }, {
+                    gridIndex: 1,
+                    show: false,
+                }, {
+                    gridIndex: 2,
+                    type: 'value',
+                    axisLine: {
+                        show: false,
+                    },
+                    axisTick: {
+                        show: false,
+                    },
+                    position: 'top',
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#B2B2B2',
+                            fontSize: 12,
+                        },
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#1F2022',
+                            width: 1,
+                            type: 'solid',
+                        },
+                    },
+                }, ],
+                yAxis: [{
+                    type: 'category',
+                    inverse: true,
+                    position: 'right',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false,
+                        margin: 8,
+                        textStyle: {
+                            color: '#9D9EA0',
+                            fontSize: 12,
+                        },
+
+                    },
+                    data: myData,
+                }, {
+                    gridIndex: 1,
+                    type: 'category',
+                    inverse: true,
+                    position: 'left',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#9D9EA0',
+                            fontSize: 12,
+                        },
+
+                    },
+                    data: myData.map(function (value) {
+                        return {
+                            value: value,
+                            textStyle: {
+                                align: 'center',
+                            }
+                        }
+                    }),
+                }, {
+                    gridIndex: 2,
+                    type: 'category',
+                    inverse: true,
+                    position: 'left',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false,
+                        textStyle: {
+                            color: '#9D9EA0',
+                            fontSize: 12,
+                        },
+
+                    },
+                    data: myData,
+                }, ],
+                series: [],
+
+            },
+
+            options: [],
+
+
+        };
+
+        for (var i = 0; i < timeLineData.length; i++) {
+            option.baseOption.timeline.data.push(timeLineData[i]);
+            option.options.push({
+                title: {
+                    text: '俱乐部：' + timeLineData[i] + '级考核【数据对比】',
+                },
+                series: [{
+                        name: '个人值',
+                        type: 'bar',
+                        barGap: 20,
+                        barWidth: 20,
+                        label: {
+                            normal: {
+                                show: false,
+                            },
+                            emphasis: {
+                                show: true,
+                                position: 'left',
+                                offset: [0, 0],
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: 14,
+                                },
+                            },
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#659F83',
+                            },
+                            emphasis: {
+                                color: '#08C7AE',
+                            },
+                        },
+                        data: databeast[timeLineData[i]],
+                    },
+
+
+                    {
+                        name: '平均值',
+                        type: 'bar',
+                        barGap: 20,
+                        barWidth: 20,
+                        xAxisIndex: 2,
+                        yAxisIndex: 2,
+                        label: {
+                            normal: {
+                                show: false,
+                            },
+                            emphasis: {
+                                show: true,
+                                position: 'right',
+                                offset: [0, 0],
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: 14,
+                                },
+                            },
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#F68989',
+                            },
+                            emphasis: {
+                                color: '#F94646',
+                            },
+                        },
+                        data: databeauty[timeLineData[i]],
+                    }
+                ]
+            });
+        }
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

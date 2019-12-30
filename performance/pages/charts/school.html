@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+
+    <script src="lib/echarts.min.js"></script>
+        <script src="lib/echarts-liquidfill.js"></script>
+</head>
+
+<body style="height:100%;">
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 100%;height:100%;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+   option = {
+    backgroundColor: '#0ca59c',
+    series: [{
+        type: 'liquidFill',
+        data: [0.93, 0.88, 0.8],
+        color: ['#49d088', '#38b470', '#2aaf66'],
+        center: ['25%', '50%'],
+        waveLength: '60%',
+        amplitude: 8,
+        radius: '40%',
+        label: {
+            normal: {
+                formatter: function() {
+                    return '本队及格率\n93%'
+                },
+                textStyle: {
+                    fontSize: 22,
+                    color: '#44c078'
+                },
+                position: ['50%', '30%']
+            }
+        },
+        outline: {
+            itemStyle: {
+                borderColor: '#49d088',
+                borderWidth: 5
+            },
+            borderDistance: 0
+        },
+        itemStyle: {
+            normal: {
+                backgroundColor: '#fff'
+            }
+        }
+    }, {
+        type: 'liquidFill',
+        data: [0.66, 0.6, 0.5],
+        color: ['#eb594b', '#e44d46', '#dc403f'],
+        center: ['75%', '50%'],
+        radius: '40%',
+        amplitude: 8,
+        label: {
+            normal: {
+                formatter: function() {
+                    return '全市及格率\n66%'
+                },
+                textStyle: {
+                    fontSize: 22,
+                    color: '#e35140'
+                },
+                position: ['50%', '30%']
+            }
+        },
+        outline: {
+            itemStyle: {
+                borderColor: '#e35140',
+                borderWidth: 5
+            },
+            borderDistance: 0
+        },
+        itemStyle: {
+            normal: {
+                backgroundColor: '#fff'
+            }
+        }
+    }]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

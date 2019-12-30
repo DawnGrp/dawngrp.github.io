@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="lib/echarts.min.js"></script>
+</head>
+
+<body style="height:100%;">
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 100%;height:100%;;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+var dataStyle = { 
+    normal: {
+        label: {show:false},
+        labelLine: {show:false},
+        shadowBlur: 40,
+        shadowColor: 'rgba(40, 40, 40, 0.5)',
+    }
+};
+var placeHolderStyle = {
+    normal : {
+        color: 'rgba(0,0,0,0)',
+        label: {show:false},
+        labelLine: {show:false}
+    },
+    emphasis : {
+        color: 'rgba(0,0,0,0)'
+    }
+};
+option = {
+   backgroundColor: '#f4f2e3',
+     color: ['#85b6b2', '#6d4f8d','#cd5e7e', '#e38980','#f7db88'],
+    tooltip : {
+        show: true,
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        itemGap:12,
+        data:['校际赛胜率','校内赛胜率','晴朗天胜率','阴雨天胜率','主场胜率','客场胜率']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'Line 1',
+            type:'pie',
+            clockWise:false,
+            radius : [180,200],
+            itemStyle : dataStyle,
+            hoverAnimation: false,
+       
+            data:[
+                {
+                    value:300,
+                    name:'校际赛胜率'
+                },
+                {
+                    value:50,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+         
+            ]
+        }, 
+         {
+            name:'Line 2',
+            type:'pie',
+            clockWise:false,
+            radius : [160, 180],
+            itemStyle : dataStyle,
+            hoverAnimation: false,
+           
+            data:[
+                {
+                    value:150, 
+                    name:'校内赛胜率'
+                },
+                {
+                    value:60,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+        {
+            name:'Line 3',
+            type:'pie',
+            clockWise:false,
+            hoverAnimation: false,
+            radius : [140, 160],
+            itemStyle : dataStyle,
+           
+            data:[
+                {
+                    value:80, 
+                    name:'晴朗天胜率'
+                },
+                {
+                    value:50,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+        {
+            name:'Line 4',
+            type:'pie',
+            clockWise:false,
+            hoverAnimation: false,
+            radius : [120, 140],
+            itemStyle : dataStyle,
+           
+            data:[
+                {
+                    value:45, 
+                    name:'阴雨天胜率'
+                },
+                {
+                    value:30,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+         {
+            name:'Line 5',
+            type:'pie',
+            clockWise: false,
+            hoverAnimation: false,
+            radius : [100, 120],
+            itemStyle : dataStyle,
+            
+            data:[
+                {
+                    value:30, 
+                    name:'主场胜率'
+                },
+                {
+                    value:30,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+
+    ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
